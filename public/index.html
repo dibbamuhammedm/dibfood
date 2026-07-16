@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DibFood Delivery</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <header>
+        <nav class="main-nav">
+            <div class="logo">DibFood</div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="login.html" class="login-btn">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Order section -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Fast And Fresh Food Delivery</h1>
+                <p>Delicious meals delivered to your door in minutes.</p>
+
+                <form class="order-form" action="#">
+                    <div class="form-group">
+                        <label for="city">Location</label>
+                        <select name="city" id="city" required>
+                            <option value="" disabled selected>Select your area</option>
+                            <option value="bundung">Bundung</option>
+                            <option value="serekunda">Serekunda</option>
+                            <option value="latrikunda">Latrikunda</option>
+                            <option value="talinding">Talinding</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" placeholder="+220 123 4567" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">House / Plot Number</label>
+                        <input type="text" id="address" placeholder="C8CF-8GJ" required />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Find Food</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="menu" class="menu-section">
+            <h2>Our Popular Menu</h2>
+            <div class="menu-grid" id="menu-grid">
+                <p>loading menu...</p>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <h2>About DibFood Delivery</h2>
+            <p>We bring your favorite meals straight to your door — fast, fresh, and reliable.</p>
+            <p class="founder-message">
+                <strong>Founder's Note:</strong><br> "Good food should be easy to enjoy — no matter where you are."<br> — DibFood Team
+            </p>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <h2>Contact Us</h2>
+            <address>
+                Bundung, BufferZone Junction<br>
+                Phone: +220 346 43576<br>
+                Email: <a href="mailto:DibFoodDelivary@gmail.com">DibFoodDelivary@gmail.com</a>
+            </address>
+
+            <h3>Send us a message</h3>
+            <form class="contact-form" id="contact-form">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Ali Njie" autocomplete="name" minlength="2" maxlength="100" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="example@gmail.com" autocomplete="email" maxlength="254" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" maxlength="2000" placeholder="How can we help you?" required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary" id="contact-submit">
+        Send Message
+    </button>
+
+                <p id="contact-status" role="status" aria-live="polite"></p>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 DibFood Delivery. All rights reserved.</p>
+    </footer>
+
+</body>
+
+</html>
