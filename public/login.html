@@ -4,61 +4,90 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DibFood Sign In</title>
+    <title>DibFood Account</title>
+    <!-- Shared controls load first; auth.css contains only account-page layout. -->
     <link rel="stylesheet" href="css/base.css" />
-    <link rel="stylesheet" href="css/login.css" />
-
-    <!-- Load only the JavaScript used by the login page. -->
+    <link rel="stylesheet" href="css/auth.css" />
     <script type="module" src="js/login.js"></script>
 </head>
 
 <body class="auth-body">
 
-    <!-- The wrapper centers one sign-in card on the page. -->
     <main class="auth-wrapper">
-        <div class="auth-card">
+        <!-- This ordinary link remains usable even if JavaScript or the API fails. -->
+        <a href="index.html" class="auth-home-link">← Back to DibFood</a>
 
-            <!-- Page heading shown above the sign-in form. -->
-            <div class="auth-header">
-                <h1>DibFood</h1>
-                <p class="subtitle">Sign in to order delicious food</p>
-            </div>
+        <section class="auth-card" aria-labelledby="auth-title">
+            <header class="auth-header">
+                <p class="auth-brand">DibFood</p>
+                <h1 id="auth-title">Welcome</h1>
+                <p class="subtitle">Sign in or create an account to continue.</p>
+            </header>
 
-            <!-- This form sends credentials to the authentication backend. -->
-            <!-- The id gives login.js a unique way to find this form. -->
-            <form class="login-form" id="login-form" action="#" method="post">
-                <div class="form-field">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="example@email.com" autocomplete="email" maxlength="254" required />
-                </div>
-
-                <div class="form-field">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="Your password" autocomplete="current-password" minlength="8" maxlength="128" required />
-                </div>
-
-                <!-- Optional account actions displayed on one row. -->
-                <div class="form-options">
-                    <label class="remember">
-                        <input type="checkbox" name="remember" />
-                        Remember me
-                    </label>
-                    <a href="#" class="forgot">Forgot password?</a>
-                </div>
-
-                <button type="submit" class="btn btn-primary">
+            <!-- These buttons expose the two forms as accessible tab panels. -->
+            <div class="auth-tabs" role="tablist" aria-label="Account options">
+                <button type="button" class="auth-tab" id="sign-in-tab" role="tab" aria-controls="sign-in-panel" aria-selected="true" data-auth-view="login">
                     Sign In
                 </button>
-                <!-- JavaScript writes login progress and errors here. -->
-                <p id="login-status" role="status" aria-live="polite"></p>
-            </form>
-
-            <!-- Account creation will be connected in the authentication phase. -->
-            <div class="auth-footer">
-                <p>Don't have an account? <a href="#" class="signup-link">Create one</a></p>
+                <button type="button" class="auth-tab" id="register-tab" role="tab" aria-controls="register-panel" aria-selected="false" data-auth-view="register" tabindex="-1">
+                    Create Account
+                </button>
             </div>
 
-        </div>
+            <!-- Sign-in sends only the fields accepted by POST /api/auth/login. -->
+            <section id="sign-in-panel" role="tabpanel" aria-labelledby="sign-in-tab">
+                <form class="auth-form" id="login-form" action="#" method="post">
+                    <div class="form-field">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" name="email" placeholder="example@email.com" autocomplete="email" maxlength="254" required />
+                    </div>
+
+                    <div class="form-field">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" name="password" placeholder="Your password" autocomplete="current-password" required minlength="8" maxlength="128" />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary auth-submit">
+                        Sign In
+                    </button>
+
+                    <!-- The live region announces progress and backend validation. -->
+                    <p class="auth-status" id="login-status" role="status" aria-live="polite" aria-atomic="true"></p>
+                </form>
+            </section>
+
+            <!-- Registration adds a confirmation field used only in this browser. -->
+            <section id="register-panel" role="tabpanel" aria-labelledby="register-tab" hidden>
+                <form class="auth-form" id="register-form" action="#" method="post">
+                    <div class="form-field">
+                        <label for="register-name">Name</label>
+                        <input type="text" id="register-name" name="name" placeholder="Your full name" autocomplete="name" minlength="2" maxlength="100" required />
+                    </div>
+
+                    <div class="form-field">
+                        <label for="register-email">Email</label>
+                        <input type="email" id="register-email" name="email" placeholder="example@email.com" autocomplete="email" maxlength="254" required />
+                    </div>
+
+                    <div class="form-field">
+                        <label for="register-password">Password</label>
+                        <input type="password" id="register-password" name="password" placeholder="Create a password" autocomplete="new-password" required minlength="8" maxlength="128" />
+                    </div>
+
+                    <div class="form-field">
+                        <label for="register-confirm-password">Confirm Password</label>
+                        <input type="password" id="register-confirm-password" name="confirmPassword" placeholder="Enter the password again" autocomplete="new-password" minlength="8" maxlength="128" aria-describedby="register-status" required />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary auth-submit">
+                        Create Account
+                    </button>
+
+                    <!-- JavaScript checks matching passwords; the backend checks all rules. -->
+                    <p class="auth-status" id="register-status" role="status" aria-live="polite" aria-atomic="true"></p>
+                </form>
+            </section>
+        </section>
     </main>
 
 </body>

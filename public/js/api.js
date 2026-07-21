@@ -10,7 +10,8 @@ const endpoints = {
     login: "/api/auth/login",
     logout: "/api/auth/logout",
     menu: "/api/menu",
-    orders: "/api/orders"
+    orders: "/api/orders",
+    register: "/api/auth/register"
 };
 
 // Return parsed JSON or a friendly error when a server sends another format.
@@ -140,6 +141,24 @@ export function logoutUser(fallbackMessage) {
         endpoints.logout, {
             method: "POST",
             credentials: "same-origin"
+        },
+        fallbackMessage
+    );
+}
+
+// Send a new customer's account details to the registration endpoint.
+export function registerUser(
+    account,
+    fallbackMessage = "Your account could not be created. Please try again."
+) {
+    return requestJson(
+        endpoints.register, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            credentials: "same-origin",
+            body: JSON.stringify(account)
         },
         fallbackMessage
     );
