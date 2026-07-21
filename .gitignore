@@ -1,10 +1,15 @@
+# npm installs project dependencies into this generated folder.
 node_modules/
 
+# Environment files will hold secrets and machine-specific settings later.
 .env
 .env.*
+# Keep a safe example file available for documentation.
 !.env.example
 
+# SQLite database files contain local runtime and customer data.
 data/*.db
 data/*.db-*
 
+# npm creates these logs when a command fails unexpectedly.
 npm-debug.log*

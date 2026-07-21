@@ -6,7 +6,9 @@
     "type": "module",
     "scripts": {
         "dev": "node --watch server.js",
-        "start": "node server.js"
+        "seed": "node seed.js",
+        "start": "node server.js",
+        "test": "node --test --test-isolation=none src/tests/backend-smoke.test.js"
     },
     "engines": {
         "node": ">=24.0.0"

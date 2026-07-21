@@ -5,59 +5,60 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DibFood Delivery</title>
-    <link rel="stylesheet" href="styles.css" />
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/home.css" />
+    <!-- Modules wait for the HTML and can import each focused feature file. -->
+    <script type="module" src="js/main.js"></script>
 </head>
 
 <body>
 
+    <!-- These links scroll to sections whose id matches each href. -->
     <header>
         <nav class="main-nav">
             <div class="logo">DibFood</div>
             <ul>
                 <li><a href="#home">Home</a></li>
                 <li><a href="#menu">Menu</a></li>
+                <li>
+                    <a href="#cart">
+                        Cart (<span id="cart-count" aria-live="polite" aria-atomic="true">0</span>)
+                    </a>
+                </li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <li><a href="login.html" class="login-btn">Login</a></li>
+                <!-- Show either the login link or the authenticated-user controls. -->
+                <li class="auth-nav">
+                    <!-- JavaScript fills this with the logged-in customer's name. -->
+                    <span id="auth-user" hidden></span>
+
+                    <a href="login.html" class="login-btn" id="login-link">
+        Login
+    </a>
+
+                    <!-- Logout changes server state, so it is a button rather than a link. -->
+                    <button type="button" class="login-btn" id="logout-button" hidden>
+        Logout
+    </button>
+                </li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <!-- Order section -->
+        <!-- Hero: introduces the service and sends visitors to the menu. -->
         <section id="home" class="hero">
             <div class="hero-content">
                 <h1>Fast And Fresh Food Delivery</h1>
                 <p>Delicious meals delivered to your door in minutes.</p>
 
-                <form class="order-form" action="#">
-                    <div class="form-group">
-                        <label for="city">Location</label>
-                        <select name="city" id="city" required>
-                            <option value="" disabled selected>Select your area</option>
-                            <option value="bundung">Bundung</option>
-                            <option value="serekunda">Serekunda</option>
-                            <option value="latrikunda">Latrikunda</option>
-                            <option value="talinding">Talinding</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" placeholder="+220 123 4567" required />
-                    </div>
-
-                    <div class="form-group">
-                        <label for="address">House / Plot Number</label>
-                        <input type="text" id="address" placeholder="C8CF-8GJ" required />
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Find Food</button>
-                </form>
+                <a href="#menu" class="btn btn-primary hero-cta">
+                    Browse Menu
+                </a>
             </div>
         </section>
 
+        <!-- JavaScript replaces this loading message with products from GET /api/menu. -->
         <section id="menu" class="menu-section">
             <h2>Our Popular Menu</h2>
             <div class="menu-grid" id="menu-grid">
@@ -65,6 +66,67 @@
             </div>
         </section>
 
+        <!-- JavaScript will render cart rows here and submit checkout to POST /api/orders. -->
+        <section id="cart" class="cart-section">
+            <h2>Your Cart</h2>
+
+            <div id="cart-items" class="cart-items">
+                <p>Your cart is empty.</p>
+            </div>
+
+            <div class="cart-summary">
+                <p>
+                    Estimated subtotal:
+                    <strong id="cart-subtotal">D 0</strong>
+                </p>
+                <small>
+                    The server confirms prices and the final total when you order.
+                </small>
+            </div>
+
+            <h3>Delivery Details</h3>
+
+            <!-- Field names match the properties expected by the order API. -->
+            <form id="checkout-form" class="checkout-form">
+                <div class="form-group">
+                    <label for="customer-name">Name</label>
+                    <input type="text" id="customer-name" name="customerName" autocomplete="name" minlength="2" maxlength="100" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="checkout-phone">Phone Number</label>
+                    <input type="tel" id="checkout-phone" name="phone" placeholder="+220 123 4567" autocomplete="tel" minlength="7" maxlength="30" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="checkout-city">Delivery Area</label>
+                    <select id="checkout-city" name="city" required>
+                        <option value="" disabled selected>
+                            Select your area
+                        </option>
+                        <option value="bundung">Bundung</option>
+                        <option value="serekunda">Serekunda</option>
+                        <option value="latrikunda">Latrikunda</option>
+                        <option value="talinding">Talinding</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="delivery-address">Delivery Address</label>
+                    <input type="text" id="delivery-address" name="address" placeholder="House, plot, or location details" autocomplete="street-address" minlength="2" maxlength="200" required />
+                </div>
+
+                <!-- Starts disabled; cart JavaScript will enable it after food is added. -->
+                <button type="submit" class="btn btn-primary" id="place-order" disabled>
+                    Place Order
+                </button>
+
+                <!-- aria-live lets screen readers announce order updates. -->
+                <p id="order-status" role="status" aria-live="polite"></p>
+            </form>
+        </section>
+
+        <!-- Static background information about the service. -->
         <section id="about" class="about-section">
             <h2>About DibFood Delivery</h2>
             <p>We bring your favorite meals straight to your door — fast, fresh, and reliable.</p>
@@ -73,6 +135,7 @@
             </p>
         </section>
 
+        <!-- This form sends a message without reloading the page. -->
         <section id="contact" class="contact-section">
             <h2>Contact Us</h2>
             <address>
@@ -99,16 +162,18 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary" id="contact-submit">
-        Send Message
-    </button>
+                    Send Message
+                </button>
 
+                <!-- aria-live lets screen readers announce sending, success, or errors. -->
                 <p id="contact-status" role="status" aria-live="polite"></p>
             </form>
         </section>
     </main>
 
+    <!-- Site-wide closing information. -->
     <footer>
-        <p>© 2025 DibFood Delivery. All rights reserved.</p>
+        <p>© 2026 DibFood Delivery. All rights reserved.</p>
     </footer>
 
 </body>

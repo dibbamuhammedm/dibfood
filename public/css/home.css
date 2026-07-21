@@ -1,0 +1,483 @@
+/* Leave room for the sticky navigation when a section link is followed. */
+
+#menu,
+#cart,
+#about,
+#contact {
+    scroll-margin-top: 8rem;
+}
+
+
+/* Navigation */
+
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    /* Sticky keeps the nav visible; z-index keeps it above page sections. */
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #e63946;
+}
+
+.main-nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2.5rem;
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+
+.main-nav a:hover,
+.main-nav a:focus {
+    color: #e63946;
+}
+
+.login-btn {
+    background: #e63946;
+    color: white !important;
+    padding: 0.5rem 1.2rem;
+    border-radius: 6px;
+}
+
+.login-btn:hover {
+    background: #d00000;
+}
+
+
+/* Keep the customer's name and authentication action aligned. */
+
+.auth-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+#auth-user {
+    color: #333;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+
+/* Make the Logout button visually match the existing Login link. */
+
+.auth-nav button.login-btn {
+    border: 0;
+    font: inherit;
+    cursor: pointer;
+}
+
+.auth-nav button.login-btn:disabled {
+    cursor: wait;
+    opacity: 0.65;
+}
+
+
+/* Keep keyboard navigation clearly visible. */
+
+.auth-nav button.login-btn:focus-visible {
+    outline: 3px solid rgba(230, 57, 70, 0.3);
+    outline-offset: 2px;
+}
+
+
+/* Hero and shared form controls */
+
+.hero {
+    /* The dark gradient keeps the white text readable over the photo. */
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1555939594-58056f625634?w=1600');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 8rem 5% 6rem;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 3.2rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.3rem;
+    margin-bottom: 2.5rem;
+    opacity: 0.95;
+}
+
+.form-group {
+    flex: 1;
+    min-width: 220px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.9rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+
+/* Menu */
+
+.menu-section {
+    padding: 5rem 5%;
+    background: white;
+}
+
+.menu-section h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 2.5rem;
+    color: #222;
+}
+
+.menu-grid {
+    display: grid;
+    /* auto-fit creates as many responsive columns as the available width allows. */
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.menu-item {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.25s;
+}
+
+.menu-item:hover {
+    transform: translateY(-8px);
+}
+
+.menu-item img {
+    width: 100%;
+    height: 200px;
+    /* Crop images to the card shape without stretching them. */
+    object-fit: cover;
+}
+
+.menu-item h3 {
+    padding: 1rem 1.2rem 0.4rem;
+    color: #222;
+}
+
+.price {
+    padding: 0 1.2rem;
+    color: #e63946;
+    font-weight: bold;
+    font-size: 1.3rem;
+}
+
+.menu-actions {
+    padding: 1rem 1.2rem 1.4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+
+/* Cart */
+
+
+/* Center the complete cart section on the page. */
+
+.cart-section {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 5rem 5%;
+    text-align: center;
+}
+
+
+/* Keep all generated cart rows centered and evenly spaced. */
+
+.cart-items {
+    max-width: 700px;
+    margin: 2rem auto;
+    display: grid;
+    gap: 1rem;
+}
+
+
+/* Give each generated cart item a visible card design. */
+
+.cart-item {
+    padding: 1.25rem;
+    background: white;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Arrange the quantity controls in one centered row. */
+
+.cart-item-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+
+/* Style the minus and plus buttons as circular controls. */
+
+.cart-control-button {
+    width: 2.5rem;
+    height: 2.5rem;
+    border: none;
+    border-radius: 50%;
+    background: #e63946;
+    color: white;
+    font-size: 1.25rem;
+    cursor: pointer;
+}
+
+
+/* Darken an available quantity button when hovered. */
+
+.cart-control-button:hover:not(:disabled) {
+    background: #d00000;
+}
+
+
+/* Make a disabled quantity button visibly unavailable. */
+
+.cart-control-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+
+/* Keep the current quantity readable between its buttons. */
+
+.cart-quantity {
+    min-width: 2rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+
+/* Style Remove differently because it deletes the complete item. */
+
+.cart-remove-button {
+    padding: 0.5rem;
+    border: none;
+    background: transparent;
+    color: #e63946;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
+/* Underline Remove when the user points at it. */
+
+.cart-remove-button:hover:not(:disabled) {
+    text-decoration: underline;
+}
+
+.cart-remove-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+
+/* Center the subtotal beneath the cart items. */
+
+.cart-summary {
+    margin: 1.5rem auto 2.5rem;
+    text-align: center;
+}
+
+
+/* Display checkout fields in a clean two-column card. */
+
+.checkout-form {
+    max-width: 700px;
+    margin: 1.5rem auto 0;
+    padding: 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.2rem;
+    text-align: left;
+}
+
+
+/* Allow checkout fields to fit inside their grid columns. */
+
+.checkout-form .form-group {
+    min-width: 0;
+}
+
+
+/* Center the order button across both form columns. */
+
+#place-order {
+    grid-column: 1 / -1;
+    justify-self: center;
+}
+
+
+/* Reserve space for order progress, success, and error messages. */
+
+#order-status {
+    grid-column: 1 / -1;
+}
+
+
+/* Both forms use the same readable space and status typography. */
+
+#order-status,
+#contact-status {
+    min-height: 1.5rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+#contact-status {
+    margin-top: 1rem;
+}
+
+
+/* Use green when an order succeeds. */
+
+#order-status[data-state="success"],
+#contact-status[data-state="success"] {
+    color: #17833b;
+}
+
+
+/* Use red when the server rejects an order. */
+
+#order-status[data-state="error"],
+#contact-status[data-state="error"] {
+    color: #c1121f;
+}
+
+
+/* Use neutral text while the order is being sent. */
+
+#order-status[data-state="sending"],
+#contact-status[data-state="sending"] {
+    color: #555;
+}
+
+
+/* Stack checkout fields on narrow screens. */
+
+@media (max-width: 650px) {
+    .checkout-form {
+        grid-template-columns: 1fr;
+        padding: 1.25rem;
+    }
+}
+
+
+/* About & Contact */
+
+.about-section,
+.contact-section {
+    padding: 5rem 5%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.about-section h2,
+.contact-section h2 {
+    text-align: center;
+    margin-bottom: 1.8rem;
+}
+
+.founder-message {
+    font-style: italic;
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: #fff8f8;
+    border-left: 4px solid #e63946;
+    border-radius: 4px;
+}
+
+.contact-form {
+    margin-top: 2.5rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contact-form textarea {
+    resize: vertical;
+}
+
+address {
+    text-align: center;
+    font-style: normal;
+    line-height: 2;
+    margin-bottom: 2.5rem;
+}
+
+
+/* Footer */
+
+footer {
+    text-align: center;
+    padding: 2.5rem;
+    background: #222;
+    color: #ccc;
+    margin-top: 3rem;
+}
+
+
+/* Adjust the main page for tablet-sized and smaller screens. */
+
+@media (max-width: 768px) {
+    .main-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.75rem;
+    }
+    .main-nav ul {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.75rem 1.25rem;
+    }
+    .hero {
+        padding: 6rem 5% 4rem;
+    }
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+}
