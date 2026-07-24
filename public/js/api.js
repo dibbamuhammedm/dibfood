@@ -3,7 +3,6 @@
 /* -------------------------------------------------------------------------- */
 
 // Keeping endpoint paths here prevents feature files from repeating them.
-// Keeping endpoint paths here prevents feature files from repeating them.
 const endpoints = {
     contact: "/api/contact",
     currentUser: "/api/auth/me",
